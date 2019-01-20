@@ -5,12 +5,13 @@
         "noImplicitAny": true,
         "module": "commonjs",
         "target": "es5",
-        "jsx": "react",
-        "plugins": [{
-            "name": "typescript-tslint-plugin"
-        }]
+        "lib": ["es6", "dom"],
+        "jsx": "react"
     },
     "include": [
         "./src/**/*"
     ],
+    "exclude": [
+        "node_modules"
+    ]
 }

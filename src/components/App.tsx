@@ -1,10 +1,15 @@
+import { CssBaseline, Paper } from '@material-ui/core';
 import * as React from 'react';
+import Message from './message/Message';
+import TopBar from './top-bar/TopBar';
 
 class App extends React.Component {
   public render() {
-    return(
+    return (
       <div>
-        <h1>React Message Board App</h1>
+        <CssBaseline />
+        <TopBar />
+        <Message />
       </div>
     );
   }
