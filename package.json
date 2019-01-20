@@ -1,0 +1,32 @@
+{
+  "name": "react-message-board",
+  "version": "1.0.0",
+  "description": "A small message board React app",
+  "main": "index.js",
+  "dependencies": {
+    "@types/react": "^16.7.20",
+    "@types/react-dom": "^16.0.11",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0"
+  },
+  "devDependencies": {
+    "awesome-typescript-loader": "^5.2.1",
+    "html-webpack-plugin": "^3.2.0",
+    "prettier": "^1.16.0",
+    "source-map-loader": "^0.2.4",
+    "tslint": "^5.12.1",
+    "tslint-config-prettier": "^1.17.0",
+    "tslint-react": "^3.6.0",
+    "typescript": "^3.2.4",
+    "webpack": "^4.28.4",
+    "webpack-cli": "^3.2.1",
+    "webpack-dev-server": "^3.1.14"
+  },
+  "scripts": {
+    "start": "webpack-dev-server --mode development --open --hot",
+    "build": "webpack --mode production",
+    "lint": "tslint --project tsconfig.json -e 'node_modules/**'"
+  },
+  "author": "Mattias Ostblom",
+  "license": "MIT"
+}
