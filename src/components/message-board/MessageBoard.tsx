@@ -1,8 +1,10 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Grid, Button } from '@material-ui/core';
+import { Grid, Button, List } from '@material-ui/core';
 import { fetchMessages, newMessage } from '../../actions/messageActions';
 import IMessage from '../../models/message.model';
+import Message from './Message';
+import MessageDialog from './MessageDialog';
 
 interface IMessageBoardProps extends StateProps, DispatchProps {}
 
@@ -11,26 +13,31 @@ class MessageBoard extends React.Component<IMessageBoardProps> {
     this.props.fetchMessages();
   }
 
-  createMessage = () => {
-    const message: IMessage = {
+  createMessage = (message: string) => {
+    const newMessage: IMessage = {
       id: 1,
-      message: 'test',
+      message: message,
       parentId: 1,
       author: 1
     };
-    this.props.newMessage(message);
+    this.props.newMessage(newMessage);
   }
 
-    render() {
-      const {messages} = this.props;
-        return (
-            <Grid container alignItems="center" justify="center" direction="column">
-                <h1>Messages</h1>
-                { messages.map((message: IMessage) => message.message )}
-                <Button onClick={this.createMessage}>Create a new message</Button>
-            </Grid>
-        );
-    }
+  render() {
+    const { messages } = this.props;
+      return (
+          <Grid container alignItems="center" justify="center" direction="column">
+              <h1>Messages</h1>
+              <List>
+              { messages.map((message: IMessage) => (
+                <Message key={message.id} message={message}/>
+                )
+              )}
+                </List>
+              <MessageDialog createMessage={this.createMessage} />
+          </Grid>
+      );
+  }
 }
 
 const mapStateToProps = (state: any) => ({

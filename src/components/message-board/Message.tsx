@@ -21,28 +21,14 @@ const messageStyles = (theme: any) => ({
 });
 
 const Message = (props: any) => {
-  const { classes } = props;
-  return (
-      <List className={classes.root}>
+  const { message } = props;
+  return (    
       <ListItem>
         <Avatar>
           <ImageIcon />
         </Avatar>
-        <ListItemText primary="Photos" secondary="Jan 9, 2014" />
+        <ListItemText primary={message.message} secondary={message.author} />
       </ListItem>
-      <ListItem>
-        <Avatar>
-          <WorkIcon />
-        </Avatar>
-        <ListItemText primary="Work" secondary="Jan 7, 2014" />
-      </ListItem>
-      <ListItem>
-        <Avatar>
-          <BeachAccessIcon />
-        </Avatar>
-        <ListItemText primary="Vacation" secondary="July 20, 2014" />
-      </ListItem>
-    </List>
   );
 };
 export default withStyles(messageStyles)(Message);
