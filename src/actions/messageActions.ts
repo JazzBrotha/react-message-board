@@ -1,13 +1,13 @@
 import { FETCH_MESSAGES, NEW_MESSAGE, UPDATE_MESSAGE, REMOVE_MESSAGE } from './types';
-import IMessage from '../models/messsage.model';
+import IMessage from '../models/message.model';
 
-export const fetchMessags = () => (dispatch: Function)  => {
+export const fetchMessages = () => (dispatch: Function)  => {
     dispatch({
         type: FETCH_MESSAGES
     });
 };
 
-export const createMessage = (message: IMessage) => (dispatch: Function) =>{
+export const newMessage = (message: IMessage) => (dispatch: Function) =>{
     dispatch({
         payload: message,
         type: NEW_MESSAGE
@@ -26,4 +26,4 @@ export const removeMessage = (id: number) => (dispatch: Function) => {
         payload: id,
         type: REMOVE_MESSAGE
     });
-}
+};

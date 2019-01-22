@@ -1,10 +1,10 @@
 import { FETCH_MESSAGES, NEW_MESSAGE, UPDATE_MESSAGE, REMOVE_MESSAGE } from '../actions/types';
-import IMessage from '../models/messsage.model';
+import IMessage from '../models/message.model';
 
 const initialState = {
     items: [] as IMessage[],
     item: {}
-}
+};
 
 export default (state = initialState, action: any) => {
     switch (action.type) {
@@ -32,4 +32,4 @@ export default (state = initialState, action: any) => {
         default:
         return state;
     }
-}
+};

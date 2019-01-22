@@ -1,6 +1,6 @@
 import { CssBaseline, Paper } from '@material-ui/core';
 import * as React from 'react';
-import Message from './components/message/Message';
+import MessageBoard from './components/message-board/MessageBoard';
 import TopBar from './components/top-bar/TopBar';
 import { Provider } from 'react-redux'
 import store from './store'
@@ -11,7 +11,7 @@ class App extends React.Component {
       <Provider store={store}>
         <CssBaseline />
         <TopBar />
-        <Message />
+        <MessageBoard />
       </Provider>
     );
   }

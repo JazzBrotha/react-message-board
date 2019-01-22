@@ -3,7 +3,7 @@ import {
   List,
   ListItem,
   ListItemText,
-  withStyles
+  withStyles,
 } from '@material-ui/core';
 import {
   BeachAccess as BeachAccessIcon,
@@ -23,7 +23,7 @@ const messageStyles = (theme: any) => ({
 const Message = (props: any) => {
   const { classes } = props;
   return (
-    <List className={classes.root}>
+      <List className={classes.root}>
       <ListItem>
         <Avatar>
           <ImageIcon />
