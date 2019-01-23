@@ -1,8 +1,7 @@
-{
-    "printWidth": 80,
-    "singleQuote": true,
-    "tabWidth": 2,
-    "useTabs": false,
-    "arrowParens": "avoid",
-    "jsxBracketSameLine": false
-}
+#.prettierrc
+singleQuote: true
+tabWidth: 2
+useTabs: false
+arrowParens: 'avoid'
+jsxBracketSameLine: false
+trailingComma: "none"

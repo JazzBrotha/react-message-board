@@ -8,37 +8,37 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
 interface IMessageDialog {
-  createMessage: (event: any) => void
+  createMessage: (event: any) => void;
 }
 
-class MessageDialog extends React.Component<IMessageDialog>{
-  state = {
+class MessageDialog extends React.Component<IMessageDialog> {
+  public state = {
     open: false,
     message: ''
   };
 
-  openDialog = () => {
+  public openDialog = () => {
     this.setState({ open: true });
   };
 
-  closeDialog = () => {
+  public closeDialog = () => {
     this.setState({ open: false });
   };
 
-  onChange = (e: any) => {
+  public onChange = (e: any) => {
     this.setState({
       message: e.target.value
     });
-  }
+  };
 
-  submitMessage = () => {
+  public submitMessage = () => {
     const { message } = this.state;
     this.props.createMessage(message);
     this.setState({
       open: false
-    })
-  }
-  render() {
+    });
+  };
+  public render() {
     return (
       <div>
         <Button variant="outlined" color="primary" onClick={this.openDialog}>
@@ -55,12 +55,12 @@ class MessageDialog extends React.Component<IMessageDialog>{
               Please fill in the field below to create your message.
             </DialogContentText>
             <TextField
-              autoFocus
+              autoFocus={true}
               margin="dense"
               id="message"
               label="Message"
               type="text"
-              fullWidth
+              fullWidth={true}
               onChange={this.onChange}
             />
           </DialogContent>
