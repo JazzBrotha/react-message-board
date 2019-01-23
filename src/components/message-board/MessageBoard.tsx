@@ -40,7 +40,7 @@ class MessageBoard extends React.Component<IMessageBoardProps> {
   };
 
   public render() {
-    const { messages } = this.props;
+    const { messages, activeUser, users } = this.props;
     return (
       <main>
         <Grid
@@ -58,6 +58,8 @@ class MessageBoard extends React.Component<IMessageBoardProps> {
                   message={message}
                   changeMessage={this.changeMessage}
                   deleteMessage={this.deleteMessage}
+                  activeUser={activeUser}
+                  users={users}
                 />
               ))}
             </List>
@@ -73,6 +75,7 @@ class MessageBoard extends React.Component<IMessageBoardProps> {
 
 const mapStateToProps = (state: any) => ({
   messages: state.messages.items,
+  activeUser: state.users.item,
   users: state.users.items
 });
 

@@ -25,7 +25,7 @@ const topBarStyles = {
   }
 };
 
-interface ITopBar extends StateProps, DispatchProps {
+interface ITopBar extends StateProps {
   classes: Classes;
 }
 
@@ -54,14 +54,6 @@ const mapStateToProps = (state: any) => ({
   user: state.users.item
 });
 
-const mapDispatchToProps = {
-  getUser
-};
-
 type StateProps = ReturnType<typeof mapStateToProps>;
-type DispatchProps = typeof mapDispatchToProps;
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withStyles(topBarStyles)(TopBar));
+export default connect(mapStateToProps)(withStyles(topBarStyles)(TopBar));

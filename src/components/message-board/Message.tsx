@@ -14,6 +14,7 @@ import {
   Delete as DeleteIcon
 } from '@material-ui/icons';
 import * as React from 'react';
+import IUser from '../../models/user.model';
 
 const messageStyles = (theme: any) => ({
   root: {
@@ -22,17 +23,29 @@ const messageStyles = (theme: any) => ({
 });
 
 const Message = (props: any) => {
-  const { message, classes, deleteMessage, changeMessage, users } = props;
+  const {
+    message,
+    classes,
+    deleteMessage,
+    changeMessage,
+    activeUser,
+    users
+  } = props;
   return (
     <ListItem className={classes.root}>
       <ListItemAvatar>
-        <Avatar>
+        <Avatar
+          src={
+            users.filter((user: IUser) => user.id === message.author)[0]
+              .imageUrl
+          }
+        >
           <ImageIcon />
         </Avatar>
       </ListItemAvatar>
       <ListItemText primary={message.message} secondary={message.author} />
       <ListItemSecondaryAction>
-        {message.author === 1 ? (
+        {message.author === activeUser.id ? (
           <React.Fragment>
             <IconButton
               aria-label="Edit"
