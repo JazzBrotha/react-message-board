@@ -1,5 +1,6 @@
 {
-  "messages": [{
+  "messages": [
+    {
       "id": 1,
       "message": "First Post",
       "parentId": null,
@@ -16,9 +17,16 @@
       "message": "Third Post",
       "parentId": null,
       "author": 3
+    },
+    {
+      "id": 4,
+      "message": "dasdasd",
+      "parentId": null,
+      "author": 1
     }
   ],
-  "users": [{
+  "users": [
+    {
       "id": 1,
       "name": "Lady Bug",
       "imageUrl": "https://images.freeimages.com/images/large-previews/cd5/lady-avatar-1632969.jpg"

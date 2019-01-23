@@ -9,8 +9,10 @@ import {
 } from '@material-ui/core';
 import { Image as ImageIcon } from '@material-ui/icons';
 import { connect } from 'react-redux';
-import { getUser } from '../../actions/userActions';
+import { fetchUsers, setUser } from '../../actions/userActions';
 import { Classes } from 'jss';
+import UserDialog from '../user-dialog/UserDialog';
+import IUser from '../../models/user.model';
 
 const topBarStyles = {
   grow: {
@@ -25,16 +27,33 @@ const topBarStyles = {
   }
 };
 
-interface ITopBar extends StateProps {
+interface ITopBar extends StateProps, DispatchProps {
   classes: Classes;
 }
 
 class TopBar extends React.Component<ITopBar> {
+  public state = {
+    isDialogOpen: false
+  };
+  public componentDidMount = () => {
+    this.props.fetchUsers();
+  };
+  public toggleOpenState = () => {
+    this.setState({
+      isDialogOpen: !this.state.isDialogOpen
+    });
+  };
+
+  public setActiveUser = (user: IUser) => {
+    this.props.setUser(user);
+    this.toggleOpenState();
+  };
   public render() {
-    const { classes, user } = this.props;
+    const { classes, user, users } = this.props;
+    const { isDialogOpen } = this.state;
     return (
-      <div className={classes.root}>
-        <AppBar position="static">
+      <div>
+        <AppBar position="static" className={classes.root}>
           <Toolbar>
             <Typography variant="h6" color="inherit" className={classes.grow}>
               MessageBoard
@@ -42,8 +61,16 @@ class TopBar extends React.Component<ITopBar> {
             <Avatar src={user.imageUrl}>
               <ImageIcon />
             </Avatar>
-            <Button color="inherit">Select User</Button>
+            <Button color="inherit" onClick={this.toggleOpenState}>
+              Select User
+            </Button>
           </Toolbar>
+          <UserDialog
+            isDialogOpen={isDialogOpen}
+            toggleOpenState={this.toggleOpenState}
+            setActiveUser={this.setActiveUser}
+            users={users}
+          />
         </AppBar>
       </div>
     );
@@ -51,9 +78,19 @@ class TopBar extends React.Component<ITopBar> {
 }
 
 const mapStateToProps = (state: any) => ({
+  users: state.users.items,
   user: state.users.item
 });
 
-type StateProps = ReturnType<typeof mapStateToProps>;
+const mapDispatchToProps = {
+  fetchUsers,
+  setUser
+};
 
-export default connect(mapStateToProps)(withStyles(topBarStyles)(TopBar));
+type StateProps = ReturnType<typeof mapStateToProps>;
+type DispatchProps = typeof mapDispatchToProps;
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(topBarStyles)(TopBar));

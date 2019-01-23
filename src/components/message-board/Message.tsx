@@ -34,12 +34,7 @@ const Message = (props: any) => {
   return (
     <ListItem className={classes.root}>
       <ListItemAvatar>
-        <Avatar
-          src={
-            users.filter((user: IUser) => user.id === message.author)[0]
-              .imageUrl
-          }
-        >
+        <Avatar>
           <ImageIcon />
         </Avatar>
       </ListItemAvatar>
