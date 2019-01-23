@@ -2,3 +2,5 @@ dist
 node_modules
 *-lock.json
 *.lock
+*.json
+webpack.config.js

@@ -1,47 +1,37 @@
 {
-  "messages": [
-    {
+  "messages": [{
       "id": 1,
-      "message": "eadsasdsd",
+      "message": "First Post",
       "parentId": null,
       "author": 1
     },
     {
       "id": 2,
-      "message": "test",
+      "message": "Second Post",
       "parentId": null,
-      "author": 1
+      "author": 2
     },
     {
       "id": 3,
-      "message": "test",
+      "message": "Third Post",
       "parentId": null,
-      "author": 1
-    },
-    {
-      "id": 4,
-      "message": "test",
-      "parentId": null,
-      "author": 1
-    },
-    {
-      "id": 5,
-      "message": "eadsasdsd",
-      "parentId": null,
-      "author": 1
-    },
-    {
-      "id": 6,
-      "message": "test",
-      "parentId": null,
-      "author": 1
+      "author": 3
     }
   ],
-  "users": [
-    {
+  "users": [{
       "id": 1,
-      "name": "Mattias",
-      "imageUrl": "whatever"
+      "name": "Lady Bug",
+      "imageUrl": "https://images.freeimages.com/images/large-previews/cd5/lady-avatar-1632969.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Geek Freak",
+      "imageUrl": "https://images.freeimages.com/images/large-previews/023/geek-avatar-1632962.jpg"
+    },
+    {
+      "id": 3,
+      "name": "Woman Glass",
+      "imageUrl": "https://images.freeimages.com/images/large-previews/971/basic-shape-avatar-1632968.jpg"
     }
   ]
 }

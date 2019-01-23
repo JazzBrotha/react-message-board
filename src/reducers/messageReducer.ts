@@ -3,7 +3,7 @@ import {
   NEW_MESSAGE,
   UPDATE_MESSAGE,
   REMOVE_MESSAGE
-} from '../actions/types';
+} from '../actions/actionTypes';
 import IMessage from '../models/message.model';
 
 const initialState = {

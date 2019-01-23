@@ -27,16 +27,18 @@ class MessageDialog extends React.Component<IMessageDialog> {
 
   public onChange = (e: any) => {
     this.setState({
-      message: e.target.value
+      message: e.target.value.trim()
     });
   };
 
   public submitMessage = () => {
     const { message } = this.state;
-    this.props.createMessage(message);
-    this.setState({
-      open: false
-    });
+    if (message) {
+      this.props.createMessage(message);
+      this.setState({
+        open: false
+      });
+    }
   };
   public render() {
     return (

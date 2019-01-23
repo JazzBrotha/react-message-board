@@ -7,6 +7,7 @@ import {
   removeMessage,
   updateMessage
 } from '../../actions/messageActions';
+import { fetchUsers } from '../../actions/userActions';
 import IMessage from '../../models/message.model';
 import Message from './Message';
 import MessageDialog from './MessageDialog';
@@ -41,38 +42,46 @@ class MessageBoard extends React.Component<IMessageBoardProps> {
   public render() {
     const { messages } = this.props;
     return (
-      <Grid
-        container={true}
-        alignItems="center"
-        justify="center"
-        direction="column"
-      >
-        <h1>Messages</h1>
-        <List>
-          {messages.map((message: IMessage) => (
-            <Message
-              key={message.id}
-              message={message}
-              changeMessage={this.changeMessage}
-              deleteMessage={this.deleteMessage}
-            />
-          ))}
-        </List>
-        <MessageDialog createMessage={this.createMessage} />
-      </Grid>
+      <main>
+        <Grid
+          container={true}
+          alignItems="center"
+          justify="center"
+          direction="column"
+        >
+          <h1>Messages</h1>
+          {messages.length ? (
+            <List>
+              {messages.map((message: IMessage) => (
+                <Message
+                  key={message.id}
+                  message={message}
+                  changeMessage={this.changeMessage}
+                  deleteMessage={this.deleteMessage}
+                />
+              ))}
+            </List>
+          ) : (
+            <p>No messages posted.</p>
+          )}
+          <MessageDialog createMessage={this.createMessage} />
+        </Grid>
+      </main>
     );
   }
 }
 
 const mapStateToProps = (state: any) => ({
-  messages: state.messages.items
+  messages: state.messages.items,
+  users: state.users.items
 });
 
 const mapDispatchToProps = {
   fetchMessages,
   newMessage,
   removeMessage,
-  updateMessage
+  updateMessage,
+  fetchUsers
 };
 
 type StateProps = ReturnType<typeof mapStateToProps>;

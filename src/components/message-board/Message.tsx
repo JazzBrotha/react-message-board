@@ -4,7 +4,8 @@ import {
   ListItemText,
   withStyles,
   ListItemSecondaryAction,
-  IconButton
+  IconButton,
+  ListItemAvatar
 } from '@material-ui/core';
 import {
   Image as ImageIcon,
@@ -21,12 +22,14 @@ const messageStyles = (theme: any) => ({
 });
 
 const Message = (props: any) => {
-  const { message, classes, deleteMessage, changeMessage } = props;
+  const { message, classes, deleteMessage, changeMessage, users } = props;
   return (
     <ListItem className={classes.root}>
-      <Avatar>
-        <ImageIcon />
-      </Avatar>
+      <ListItemAvatar>
+        <Avatar>
+          <ImageIcon />
+        </Avatar>
+      </ListItemAvatar>
       <ListItemText primary={message.message} secondary={message.author} />
       <ListItemSecondaryAction>
         {message.author === 1 ? (
