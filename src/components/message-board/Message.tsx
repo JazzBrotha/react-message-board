@@ -1,34 +1,56 @@
 import {
   Avatar,
-  List,
   ListItem,
   ListItemText,
   withStyles,
+  ListItemSecondaryAction,
+  IconButton
 } from '@material-ui/core';
 import {
-  BeachAccess as BeachAccessIcon,
   Image as ImageIcon,
-  Work as WorkIcon
+  Comment as CommentIcon,
+  Edit as EditIcon,
+  Delete as DeleteIcon
 } from '@material-ui/icons';
 import * as React from 'react';
 
 const messageStyles = (theme: any) => ({
   root: {
-    backgroundColor: theme.palette.background.paper,
-    maxWidth: 360,
-    width: '100%'
+    width: 400
   }
 });
 
 const Message = (props: any) => {
-  const { message } = props;
-  return (    
-      <ListItem>
-        <Avatar>
-          <ImageIcon />
-        </Avatar>
-        <ListItemText primary={message.message} secondary={message.author} />
-      </ListItem>
+  const { message, classes, deleteMessage, changeMessage } = props;
+  return (
+    <ListItem className={classes.root}>
+      <Avatar>
+        <ImageIcon />
+      </Avatar>
+      <ListItemText primary={message.message} secondary={message.author} />
+      <ListItemSecondaryAction>
+        {message.author === 1 ? (
+          <React.Fragment>
+            <IconButton
+              aria-label="Edit"
+              onClick={() => changeMessage(message)}
+            >
+              <EditIcon />
+            </IconButton>
+            <IconButton
+              aria-label="Delete"
+              onClick={() => deleteMessage(message.id)}
+            >
+              <DeleteIcon />
+            </IconButton>
+          </React.Fragment>
+        ) : (
+          <IconButton aria-label="Comments">
+            <CommentIcon />
+          </IconButton>
+        )}
+      </ListItemSecondaryAction>
+    </ListItem>
   );
 };
 export default withStyles(messageStyles)(Message);

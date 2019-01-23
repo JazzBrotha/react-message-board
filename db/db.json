@@ -1,0 +1,47 @@
+{
+  "messages": [
+    {
+      "id": 1,
+      "message": "eadsasdsd",
+      "parentId": null,
+      "author": 1
+    },
+    {
+      "id": 2,
+      "message": "test",
+      "parentId": null,
+      "author": 1
+    },
+    {
+      "id": 3,
+      "message": "test",
+      "parentId": null,
+      "author": 1
+    },
+    {
+      "id": 4,
+      "message": "test",
+      "parentId": null,
+      "author": 1
+    },
+    {
+      "id": 5,
+      "message": "eadsasdsd",
+      "parentId": null,
+      "author": 1
+    },
+    {
+      "id": 6,
+      "message": "test",
+      "parentId": null,
+      "author": 1
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "name": "Mattias",
+      "imageUrl": "whatever"
+    }
+  ]
+}

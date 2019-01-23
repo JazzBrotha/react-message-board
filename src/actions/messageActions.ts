@@ -1,29 +1,64 @@
-import { FETCH_MESSAGES, NEW_MESSAGE, UPDATE_MESSAGE, REMOVE_MESSAGE } from './types';
+import {
+  FETCH_MESSAGES,
+  NEW_MESSAGE,
+  UPDATE_MESSAGE,
+  REMOVE_MESSAGE
+} from './types';
 import IMessage from '../models/message.model';
 
-export const fetchMessages = () => (dispatch: Function)  => {
-    dispatch({
-        type: FETCH_MESSAGES
-    });
+export const fetchMessages = () => (dispatch: Function) => {
+  fetch('http://localhost:3000/messages')
+    .then(res => res.json())
+    .then(messages =>
+      dispatch({
+        type: FETCH_MESSAGES,
+        payload: messages
+      })
+    )
+    .catch(err => console.log(err));
 };
 
-export const newMessage = (message: IMessage) => (dispatch: Function) =>{
-    dispatch({
+export const newMessage = (message: IMessage) => (dispatch: Function) => {
+  fetch('http://localhost:3000/messages', {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json'
+    },
+    body: JSON.stringify(message)
+  })
+    .then(res => res.json())
+    .then(message =>
+      dispatch({
         payload: message,
         type: NEW_MESSAGE
-    });
+      })
+    )
+    .catch(err => console.log(err));
 };
 
-export const updateMessage = (id: number) => (dispatch: Function)  => {
-    dispatch({
-        payload: id,
-        type: UPDATE_MESSAGE
-    });
+export const updateMessage = (message: IMessage) => (dispatch: Function) => {
+  fetch(`http://localhost:3000/messages/${message.id}`, {
+    method: 'PUT',
+    headers: {
+      'content-type': 'application/json'
+    },
+    body: JSON.stringify(message)
+  });
+  dispatch({
+    payload: message,
+    type: UPDATE_MESSAGE
+  });
 };
 
 export const removeMessage = (id: number) => (dispatch: Function) => {
-    dispatch({
+  fetch(`http://localhost:3000/messages/${id}`, {
+    method: 'DELETE'
+  })
+    .then(res =>
+      dispatch({
         payload: id,
         type: REMOVE_MESSAGE
-    });
+      })
+    )
+    .catch(err => console.log(err));
 };
