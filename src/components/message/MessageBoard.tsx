@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Grid, Typography } from '@material-ui/core';
+import { Grid, Typography, Button } from '@material-ui/core';
 import IMessage from '../../models/message.model';
 import MessageCard from './MessageCard';
 
@@ -18,9 +18,24 @@ const MessageBoard = ({
     justify="center"
     direction="column"
   >
-    <Typography component="h1" variant="h5">
+    <Typography component="h1" variant="h5" style={{ marginTop: 16 }}>
       Messages
     </Typography>
+    {activeUser ? (
+      <Button
+        variant="outlined"
+        color="primary"
+        style={{ marginTop: 16 }}
+        onClick={() => setMode('Create')}
+      >
+        Create New Message
+      </Button>
+    ) : (
+      <Typography component="p">
+        Select a user in the toolbar to create, edit, delete, and comment
+        messages.
+      </Typography>
+    )}
     {messages.length ? (
       <Grid container={true} spacing={16} style={{ padding: 16 }}>
         {messages.map((message: IMessage) => (
@@ -42,9 +57,7 @@ const MessageBoard = ({
           </React.Fragment>
         ))}
       </Grid>
-    ) : (
-      <p>No messages posted.</p>
-    )}
+    ) : null}
   </Grid>
 );
 

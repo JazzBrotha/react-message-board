@@ -45,9 +45,11 @@ class TopBar extends React.Component<ITopBar> {
             <Typography variant="h6" color="inherit" className={classes.grow}>
               React Message Board
             </Typography>
-            <Avatar src={user.imageUrl}>
-              <ImageIcon />
-            </Avatar>
+            {user ? (
+              <Avatar src={user.imageUrl}>
+                <ImageIcon />
+              </Avatar>
+            ) : null}
             <Button color="inherit" onClick={this.toggleOpenState}>
               {user ? 'Switch User' : 'Select User'}
             </Button>

@@ -1,50 +1,42 @@
 {
-  "messages": [
-    {
+  "messages": [{
       "id": 1,
-      "message": "First Post",
+      "message": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
       "parentId": null,
       "author": 1
     },
     {
       "id": 2,
-      "message": "Second Post",
+      "message": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
       "parentId": null,
-      "author": 1
+      "author": 2
     },
     {
       "id": 3,
-      "message": "Third Post",
+      "message": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
       "parentId": null,
-      "author": 2
+      "author": 3
     },
     {
       "id": 4,
-      "message": "First Comment",
-      "parentId": 1,
-      "author": 2
-    },
-    {
-      "id": 5,
-      "message": "Create a comment",
+      "message": "Hi Barabara",
       "parentId": 3,
-      "author": 1
+      "author": 2
     }
   ],
-  "users": [
-    {
+  "users": [{
       "id": 1,
-      "name": "Lady Bug",
+      "name": "Rachel Hall",
       "imageUrl": "https://images.freeimages.com/images/large-previews/cd5/lady-avatar-1632969.jpg"
     },
     {
       "id": 2,
-      "name": "Geek Freak",
+      "name": "Raymond Barnes",
       "imageUrl": "https://images.freeimages.com/images/large-previews/023/geek-avatar-1632962.jpg"
     },
     {
       "id": 3,
-      "name": "Woman Glass",
+      "name": "Barbara Oconnor",
       "imageUrl": "https://images.freeimages.com/images/large-previews/971/basic-shape-avatar-1632968.jpg"
     }
   ]

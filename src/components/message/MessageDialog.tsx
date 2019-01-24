@@ -46,55 +46,38 @@ class MessageDialog extends React.Component<
     } = this.props;
     const { messageText } = this.state;
     return (
-      <div>
-        {activeUser.id ? (
-          <Button
-            variant="outlined"
-            color="primary"
-            onClick={() => setMode('Create')}
-          >
-            Create New Message
+      <Dialog
+        open={isDialogOpen}
+        onClose={toggleOpenState}
+        aria-labelledby="form-dialog-title"
+      >
+        <DialogTitle id="form-dialog-title">{`${mode} Message`}</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            {`Please fill in the field below to ${mode.toLowerCase()} message`}.
+          </DialogContentText>
+          <TextField
+            autoFocus={true}
+            margin="dense"
+            id="message"
+            label="Message"
+            type="text"
+            fullWidth={true}
+            onChange={this.onChange}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={toggleOpenState} color="primary">
+            Cancel
           </Button>
-        ) : (
-          <p>
-            Select a user in the toolbar to create, edit, delete, and comment
-            messages.
-          </p>
-        )}
-        <Dialog
-          open={isDialogOpen}
-          onClose={toggleOpenState}
-          aria-labelledby="form-dialog-title"
-        >
-          <DialogTitle id="form-dialog-title">{`${mode} Message`}</DialogTitle>
-          <DialogContent>
-            <DialogContentText>
-              {`Please fill in the field below to ${mode.toLowerCase()} message`}
-              .
-            </DialogContentText>
-            <TextField
-              autoFocus={true}
-              margin="dense"
-              id="message"
-              label="Message"
-              type="text"
-              fullWidth={true}
-              onChange={this.onChange}
-            />
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={toggleOpenState} color="primary">
-              Cancel
-            </Button>
-            <Button
-              onClick={() => submitMessage(messageText, mode)}
-              color="primary"
-            >
-              Submit
-            </Button>
-          </DialogActions>
-        </Dialog>
-      </div>
+          <Button
+            onClick={() => submitMessage(messageText, mode)}
+            color="primary"
+          >
+            Submit
+          </Button>
+        </DialogActions>
+      </Dialog>
     );
   }
 }

@@ -66,7 +66,9 @@ class MessageContainer extends React.Component<
     this.props.newMessage(newMessage);
   };
   submitMessage = (messageText: string, mode: string) => {
-    const { activeMessage } = this.state;
+    if (!messageText) {
+      return;
+    }
     if (mode === 'Create') {
       this.createMessage(messageText);
     } else if (mode === 'Edit') {

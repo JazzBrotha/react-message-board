@@ -22,13 +22,10 @@ import {
   ListItemAvatar,
   ListItemText
 } from '@material-ui/core';
+
 const messageListCardStyles = theme => ({
   card: {
     width: '100%'
-  },
-  media: {
-    height: 0,
-    paddingTop: '56.25%' // 16:9
   },
   actions: {
     display: 'flex'
@@ -42,6 +39,11 @@ const messageListCardStyles = theme => ({
   },
   expandOpen: {
     transform: 'rotate(180deg)'
+  },
+  messageText: {
+    // Fixes typescript widening issue
+    // Read more here, https://github.com/Microsoft/TypeScript/issues/241
+    overflowWrap: 'break-word' as 'break-word'
   }
 });
 
@@ -96,10 +98,12 @@ class MessageCard extends React.Component<
           subheader={author.name}
         />
         <CardContent>
-          <Typography component="p">{currentMessage.message}</Typography>
+          <Typography component="p" className={classes.messageText}>
+            {currentMessage.message}
+          </Typography>
         </CardContent>
         <CardActions className={classes.actions} disableActionSpacing={true}>
-          {currentMessage.author === activeUser.id ? (
+          {activeUser && currentMessage.author === activeUser.id ? (
             <React.Fragment>
               <IconButton
                 aria-label="Edit message"
@@ -119,7 +123,7 @@ class MessageCard extends React.Component<
             </React.Fragment>
           ) : (
             <React.Fragment>
-              {activeUser.id ? (
+              {activeUser ? (
                 <IconButton
                   aria-label="Comment message"
                   onClick={() => {
