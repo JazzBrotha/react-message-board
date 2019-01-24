@@ -9,7 +9,7 @@ import {
 } from '@material-ui/core';
 import { Image as ImageIcon } from '@material-ui/icons';
 import { connect } from 'react-redux';
-import { fetchUsers, setUser } from '../../actions/userActions';
+import { fetchUsers, setUser, getUser } from '../../actions/userActions';
 import { Classes } from 'jss';
 import UserDialog from '../user-dialog/UserDialog';
 import IUser from '../../models/user.model';
@@ -37,6 +37,7 @@ class TopBar extends React.Component<ITopBar> {
   };
   public componentDidMount = () => {
     this.props.fetchUsers();
+    this.props.getUser();
   };
   public toggleOpenState = () => {
     this.setState({
@@ -84,6 +85,7 @@ const mapStateToProps = (state: any) => ({
 
 const mapDispatchToProps = {
   fetchUsers,
+  getUser,
   setUser
 };
 

@@ -36,12 +36,10 @@ const MessageDialog = ({
       onClose={toggleOpenState}
       aria-labelledby="form-dialog-title"
     >
-      <DialogTitle id="form-dialog-title">
-        <span>{mode === 'Create' ? 'Create New Message' : 'Edit Message'}</span>
-      </DialogTitle>
+      <DialogTitle id="form-dialog-title">{`${mode} Message`}</DialogTitle>
       <DialogContent>
         <DialogContentText>
-          Please fill in the field below to create your message.
+          {`Please fill in the field below to ${mode.toLowerCase()} message`}.
         </DialogContentText>
         <TextField
           autoFocus={true}

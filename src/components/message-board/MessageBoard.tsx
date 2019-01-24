@@ -53,10 +53,13 @@ class MessageBoard extends React.Component<IMessageBoardProps> {
 
   public submitMessage = () => {
     const { messageText, mode, activeMessage } = this.state;
-    mode === 'Create'
-      ? this.createMessage(messageText)
-      : this.changeMessage(activeMessage);
-
+    if (mode === 'Create') {
+      this.createMessage(messageText);
+    } else if (mode === 'Edit') {
+      this.changeMessage(activeMessage);
+    } else {
+      this.commentOnMessage(activeMessage);
+    }
     this.setState({
       isDialogOpen: false
     });
@@ -84,6 +87,18 @@ class MessageBoard extends React.Component<IMessageBoardProps> {
     this.toggleOpenState();
   };
 
+  public commentOnMessage = (parentMessage: IMessage) => {
+    const messageId: number = this.props.messages.length + 1;
+    const { activeUser } = this.props;
+    const newMessage: IMessage = {
+      id: messageId,
+      message: this.state.messageText,
+      parentId: parentMessage.id,
+      author: activeUser.id
+    };
+    this.props.newMessage(newMessage);
+  };
+
   public render() {
     const { messages, activeUser, users } = this.props;
     const { isDialogOpen, mode } = this.state;
@@ -96,23 +111,6 @@ class MessageBoard extends React.Component<IMessageBoardProps> {
           direction="column"
         >
           <h1>Messages</h1>
-          {messages.length ? (
-            <List>
-              {messages.map((message: IMessage) => (
-                <Message
-                  key={message.id}
-                  message={message}
-                  setMode={this.setMode}
-                  deleteMessage={this.deleteMessage}
-                  activeUser={activeUser}
-                  users={users}
-                  setActiveMessage={this.setActiveMessage}
-                />
-              ))}
-            </List>
-          ) : (
-            <p>No messages posted.</p>
-          )}
           <MessageDialog
             activeUser={activeUser}
             isDialogOpen={isDialogOpen}
@@ -122,6 +120,26 @@ class MessageBoard extends React.Component<IMessageBoardProps> {
             mode={mode}
             setMode={this.setMode}
           />
+          {messages.length ? (
+            <List>
+              <Grid container={true}>
+                {messages.map((message: IMessage) => (
+                  <Grid item={true} key={message.id}>
+                    <Message
+                      message={message}
+                      setMode={this.setMode}
+                      deleteMessage={this.deleteMessage}
+                      activeUser={activeUser}
+                      users={users}
+                      setActiveMessage={this.setActiveMessage}
+                    />
+                  </Grid>
+                ))}
+              </Grid>
+            </List>
+          ) : (
+            <p>No messages posted.</p>
+          )}
         </Grid>
       </main>
     );
