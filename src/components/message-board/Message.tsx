@@ -31,24 +31,26 @@ const messageStyles = (theme: any) => ({
 
 const Message = (props: any) => {
   const {
-    message,
+    currentMessage,
     classes,
     deleteMessage,
     setMode,
     activeUser,
     users,
-    setActiveMessage
+    setActiveMessage,
+    messages
   } = props;
   return (
     <React.Fragment>
       <ListItem className={classes.root}>
         <MessageListCard
           users={users}
-          message={message}
+          currentMessage={currentMessage}
           setActiveMessage={setActiveMessage}
           setMode={setMode}
           deleteMessage={deleteMessage}
           activeUser={activeUser}
+          messages={messages}
         />
         {/* <ListItemAvatar>
           <Avatar

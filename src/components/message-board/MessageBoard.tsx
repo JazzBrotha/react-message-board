@@ -124,16 +124,21 @@ class MessageBoard extends React.Component<IMessageBoardProps> {
             <List>
               <Grid container={true}>
                 {messages.map((message: IMessage) => (
-                  <Grid item={true} key={message.id}>
-                    <Message
-                      message={message}
-                      setMode={this.setMode}
-                      deleteMessage={this.deleteMessage}
-                      activeUser={activeUser}
-                      users={users}
-                      setActiveMessage={this.setActiveMessage}
-                    />
-                  </Grid>
+                  <React.Fragment>
+                    {!message.parentId ? (
+                      <Grid item={true} key={message.id}>
+                        <Message
+                          currentMessage={message}
+                          messages={messages}
+                          setMode={this.setMode}
+                          deleteMessage={this.deleteMessage}
+                          activeUser={activeUser}
+                          users={users}
+                          setActiveMessage={this.setActiveMessage}
+                        />
+                      </Grid>
+                    ) : null}
+                  </React.Fragment>
                 ))}
               </Grid>
             </List>

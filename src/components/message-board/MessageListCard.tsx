@@ -17,7 +17,12 @@ import CommentIcon from '@material-ui/icons/Comment';
 import { Classes } from 'jss';
 import IUser from '../../models/user.model';
 import IMessage from '../../models/message.model';
-
+import {
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemText
+} from '@material-ui/core';
 const messageListCardStyles = theme => ({
   card: {
     maxWidth: 400
@@ -44,7 +49,8 @@ const messageListCardStyles = theme => ({
 interface IMessageListCardProps {
   classes: Classes;
   users: IUser[];
-  message: IMessage;
+  currentMessage: IMessage;
+  messages: IMessage[];
   activeUser: IUser;
   setActiveMessage: Function;
   setMode: Function;
@@ -69,21 +75,25 @@ class MessageListCard extends React.Component<
     const {
       classes,
       users,
-      message,
+      currentMessage,
+      messages,
       setActiveMessage,
       setMode,
       deleteMessage,
       activeUser
     } = this.props;
     const author: IUser = users.find(
-      (user: IUser) => user.id === message.author
+      (user: IUser) => user.id === currentMessage.author
+    );
+    const childMessages: IMessage[] = messages.filter(
+      (message: IMessage) => message.parentId === currentMessage.id
     );
 
     return (
       <Card className={classes.card}>
         <CardHeader
           avatar={<Avatar alt="" src={author.imageUrl} />}
-          title={message.message}
+          title={currentMessage.message}
           subheader={author.name}
         />
         <CardContent>
@@ -94,20 +104,20 @@ class MessageListCard extends React.Component<
           </Typography>
         </CardContent>
         <CardActions className={classes.actions} disableActionSpacing={true}>
-          {message.author === activeUser.id ? (
+          {currentMessage.author === activeUser.id ? (
             <React.Fragment>
               <IconButton
-                aria-label="Edit"
+                aria-label="Edit message"
                 onClick={() => {
-                  setActiveMessage(message);
+                  setActiveMessage(currentMessage);
                   setMode('Edit');
                 }}
               >
                 <EditIcon />
               </IconButton>
               <IconButton
-                aria-label="Delete"
-                onClick={() => deleteMessage(message.id)}
+                aria-label="Delete message"
+                onClick={() => deleteMessage(currentMessage.id)}
               >
                 <DeleteIcon />
               </IconButton>
@@ -116,9 +126,9 @@ class MessageListCard extends React.Component<
             <React.Fragment>
               {activeUser.id ? (
                 <IconButton
-                  aria-label="Comments"
+                  aria-label="Comment message"
                   onClick={() => {
-                    setActiveMessage(message);
+                    setActiveMessage(currentMessage);
                     setMode('Comment');
                   }}
                 >
@@ -127,48 +137,44 @@ class MessageListCard extends React.Component<
               ) : null}
             </React.Fragment>
           )}
-
-          <IconButton
-            className={classnames(classes.expand, {
-              [classes.expandOpen]: this.state.expanded
-            })}
-            onClick={this.handleExpandClick}
-            aria-expanded={this.state.expanded}
-            aria-label="Show more"
-          >
-            <ExpandMoreIcon />
-          </IconButton>
+          {childMessages.length ? (
+            <React.Fragment>
+              <IconButton
+                className={classnames(classes.expand, {
+                  [classes.expandOpen]: this.state.expanded
+                })}
+                onClick={this.handleExpandClick}
+                aria-expanded={this.state.expanded}
+                aria-label="Display comments"
+              >
+                <ExpandMoreIcon />
+              </IconButton>
+            </React.Fragment>
+          ) : null}
         </CardActions>
         <Collapse in={this.state.expanded} timeout="auto" unmountOnExit={true}>
           <CardContent>
-            <Typography paragraph={true}>Method:</Typography>
-            <Typography paragraph={true}>
-              Heat 1/2 cup of the broth in a pot until simmering, add saffron
-              and set aside for 10 minutes.
-            </Typography>
-            <Typography paragraph={true}>
-              Heat oil in a (14- to 16-inch) paella pan or a large, deep skillet
-              over medium-high heat. Add chicken, shrimp and chorizo, and cook,
-              stirring occasionally until lightly browned, 6 to 8 minutes.
-              Transfer shrimp to a large plate and set aside, leaving chicken
-              and chorizo in the pan. Add pimentón, bay leaves, garlic,
-              tomatoes, onion, salt and pepper, and cook, stirring often until
-              thickened and fragrant, about 10 minutes. Add saffron broth and
-              remaining 4 1/2 cups chicken broth; bring to a boil.
-            </Typography>
-            <Typography paragraph={true}>
-              Add rice and stir very gently to distribute. Top with artichokes
-              and peppers, and cook without stirring, until most of the liquid
-              is absorbed, 15 to 18 minutes. Reduce heat to medium-low, add
-              reserved shrimp and mussels, tucking them down into the rice, and
-              cook again without stirring, until mussels have opened and rice is
-              just tender, 5 to 7 minutes more. (Discard any mussels that don’t
-              open.)
-            </Typography>
-            <Typography>
-              Set aside off of the heat to let rest for 10 minutes, and then
-              serve.
-            </Typography>
+            <List>
+              {childMessages.map((message: IMessage) => (
+                <ListItem>
+                  <ListItemAvatar>
+                    <Avatar
+                      src={
+                        users.find((user: IUser) => user.id === message.author)
+                          .imageUrl
+                      }
+                    />
+                  </ListItemAvatar>
+                  <ListItemText
+                    primary={message.message}
+                    secondary={
+                      users.find((user: IUser) => user.id === message.author)
+                        .name
+                    }
+                  />
+                </ListItem>
+              ))}
+            </List>
           </CardContent>
         </Collapse>
       </Card>

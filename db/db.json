@@ -10,18 +10,24 @@
       "id": 2,
       "message": "Second Post",
       "parentId": null,
-      "author": 2
+      "author": 1
     },
     {
       "id": 3,
       "message": "Third Post",
       "parentId": null,
-      "author": 3
+      "author": 2
     },
     {
       "id": 4,
-      "message": "dasdasd",
-      "parentId": null,
+      "message": "First Comment",
+      "parentId": 1,
+      "author": 2
+    },
+    {
+      "id": 5,
+      "message": "Create a comment",
+      "parentId": 3,
       "author": 1
     }
   ],
