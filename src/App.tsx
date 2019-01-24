@@ -1,10 +1,10 @@
-import { CssBaseline, Paper } from '@material-ui/core';
 import * as React from 'react';
-import MessageBoard from './components/message-board/MessageBoard';
-import TopBar from './components/top-bar/TopBar';
-import UserDialog from './components/user-dialog/UserDialog';
 import { Provider } from 'react-redux';
 import store from './store';
+import { CssBaseline } from '@material-ui/core';
+import MessageContainer from './components/message/MessageContainer';
+import TopBar from './components/top-bar/TopBar';
+import UserContainer from './components/user/UserContainer';
 
 class App extends React.Component {
   public render() {
@@ -12,7 +12,8 @@ class App extends React.Component {
       <Provider store={store}>
         <CssBaseline />
         <TopBar />
-        <MessageBoard />
+        <UserContainer />
+        <MessageContainer />
       </Provider>
     );
   }

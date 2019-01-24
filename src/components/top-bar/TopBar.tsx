@@ -9,20 +9,11 @@ import {
 } from '@material-ui/core';
 import { Image as ImageIcon } from '@material-ui/icons';
 import { connect } from 'react-redux';
-import { fetchUsers, setUser, getUser } from '../../actions/userActions';
+import { getUser } from '../../actions/userActions';
 import { Classes } from 'jss';
-import UserDialog from '../user-dialog/UserDialog';
-import IUser from '../../models/user.model';
 
 const topBarStyles = {
   grow: {
-    flexGrow: 1
-  },
-  menuButton: {
-    marginLeft: -12,
-    marginRight: 20
-  },
-  root: {
     flexGrow: 1
   }
 };
@@ -32,29 +23,22 @@ interface ITopBar extends StateProps, DispatchProps {
 }
 
 class TopBar extends React.Component<ITopBar> {
-  public state = {
+  state = {
     isDialogOpen: false
   };
-  public componentDidMount = () => {
-    this.props.fetchUsers();
+  componentDidMount = () => {
     this.props.getUser();
   };
-  public toggleOpenState = () => {
+  toggleOpenState = () => {
     this.setState({
       isDialogOpen: !this.state.isDialogOpen
     });
   };
-
-  public setActiveUser = (user: IUser) => {
-    this.props.setUser(user);
-    this.toggleOpenState();
-  };
-  public render() {
-    const { classes, user, users } = this.props;
-    const { isDialogOpen } = this.state;
+  render() {
+    const { classes, user } = this.props;
     return (
       <div>
-        <AppBar position="static" className={classes.root}>
+        <AppBar position="static">
           <Toolbar>
             <Typography variant="h6" color="inherit" className={classes.grow}>
               React Message Board
@@ -66,12 +50,6 @@ class TopBar extends React.Component<ITopBar> {
               Select User
             </Button>
           </Toolbar>
-          <UserDialog
-            isDialogOpen={isDialogOpen}
-            toggleOpenState={this.toggleOpenState}
-            setActiveUser={this.setActiveUser}
-            users={users}
-          />
         </AppBar>
       </div>
     );
@@ -79,14 +57,11 @@ class TopBar extends React.Component<ITopBar> {
 }
 
 const mapStateToProps = (state: any) => ({
-  users: state.users.items,
   user: state.users.item
 });
 
 const mapDispatchToProps = {
-  fetchUsers,
-  getUser,
-  setUser
+  getUser
 };
 
 type StateProps = ReturnType<typeof mapStateToProps>;

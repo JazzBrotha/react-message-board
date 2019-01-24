@@ -12,7 +12,6 @@ import Typography from '@material-ui/core/Typography';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
 import CommentIcon from '@material-ui/icons/Comment';
 import { Classes } from 'jss';
 import IUser from '../../models/user.model';
@@ -25,7 +24,7 @@ import {
 } from '@material-ui/core';
 const messageListCardStyles = theme => ({
   card: {
-    maxWidth: 400
+    width: '100%'
   },
   media: {
     height: 0,
@@ -46,7 +45,7 @@ const messageListCardStyles = theme => ({
   }
 });
 
-interface IMessageListCardProps {
+interface IMessageCardProps {
   classes: Classes;
   users: IUser[];
   currentMessage: IMessage;
@@ -55,23 +54,24 @@ interface IMessageListCardProps {
   setActiveMessage: Function;
   setMode: Function;
   deleteMessage: Function;
+  submitMessage: Function;
 }
 
-interface IMessageListCardState {
+interface IMessageCardState {
   expanded: boolean;
 }
 
-class MessageListCard extends React.Component<
-  IMessageListCardProps,
-  IMessageListCardState
+class MessageCard extends React.Component<
+  IMessageCardProps,
+  IMessageCardState
 > {
-  public state = { expanded: false };
+  state = { expanded: false };
 
-  public handleExpandClick = () => {
+  handleExpandClick = () => {
     this.setState(state => ({ expanded: !state.expanded }));
   };
 
-  public render() {
+  render() {
     const {
       classes,
       users,
@@ -93,15 +93,10 @@ class MessageListCard extends React.Component<
       <Card className={classes.card}>
         <CardHeader
           avatar={<Avatar alt="" src={author.imageUrl} />}
-          title={currentMessage.message}
           subheader={author.name}
         />
         <CardContent>
-          <Typography component="p">
-            This impressive paella is a perfect party dish and a fun meal to
-            cook together with your guests. Add 1 cup of frozen peas along with
-            the mussels, if you like.
-          </Typography>
+          <Typography component="p">{currentMessage.message}</Typography>
         </CardContent>
         <CardActions className={classes.actions} disableActionSpacing={true}>
           {currentMessage.author === activeUser.id ? (
@@ -154,6 +149,7 @@ class MessageListCard extends React.Component<
         </CardActions>
         <Collapse in={this.state.expanded} timeout="auto" unmountOnExit={true}>
           <CardContent>
+            <Typography variant="h6">Comments</Typography>
             <List>
               {childMessages.map((message: IMessage) => (
                 <ListItem>
@@ -182,4 +178,4 @@ class MessageListCard extends React.Component<
   }
 }
 
-export default withStyles(messageListCardStyles)(MessageListCard);
+export default withStyles(messageListCardStyles)(MessageCard);
