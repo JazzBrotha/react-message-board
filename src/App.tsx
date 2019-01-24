@@ -12,7 +12,6 @@ class App extends React.Component {
       <Provider store={store}>
         <CssBaseline />
         <TopBar />
-        <UserContainer />
         <MessageContainer />
       </Provider>
     );

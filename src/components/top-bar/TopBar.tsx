@@ -11,6 +11,7 @@ import { Image as ImageIcon } from '@material-ui/icons';
 import { connect } from 'react-redux';
 import { getUser } from '../../actions/userActions';
 import { Classes } from 'jss';
+import UserContainer from '../user/UserContainer';
 
 const topBarStyles = {
   grow: {
@@ -36,8 +37,9 @@ class TopBar extends React.Component<ITopBar> {
   };
   render() {
     const { classes, user } = this.props;
+    const { isDialogOpen } = this.state;
     return (
-      <div>
+      <React.Fragment>
         <AppBar position="static">
           <Toolbar>
             <Typography variant="h6" color="inherit" className={classes.grow}>
@@ -47,11 +49,15 @@ class TopBar extends React.Component<ITopBar> {
               <ImageIcon />
             </Avatar>
             <Button color="inherit" onClick={this.toggleOpenState}>
-              Select User
+              {user ? 'Switch User' : 'Select User'}
             </Button>
           </Toolbar>
         </AppBar>
-      </div>
+        <UserContainer
+          isDialogOpen={isDialogOpen}
+          toggleOpenState={this.toggleOpenState}
+        />
+      </React.Fragment>
     );
   }
 }
