@@ -27,24 +27,33 @@ const Message = (props: any) => {
     message,
     classes,
     deleteMessage,
-    changeMessage,
+    setMode,
     activeUser,
-    users
+    users,
+    setActiveMessage
   } = props;
   return (
     <ListItem className={classes.root}>
       <ListItemAvatar>
-        <Avatar>
+        <Avatar
+          src={users.find((user: IUser) => user.id === message.author).imageUrl}
+        >
           <ImageIcon />
         </Avatar>
       </ListItemAvatar>
-      <ListItemText primary={message.message} secondary={message.author} />
+      <ListItemText
+        primary={message.message}
+        secondary={users.find((user: IUser) => user.id === message.author).name}
+      />
       <ListItemSecondaryAction>
         {message.author === activeUser.id ? (
           <React.Fragment>
             <IconButton
               aria-label="Edit"
-              onClick={() => changeMessage(message)}
+              onClick={() => {
+                setMode('Edit');
+                setActiveMessage(message);
+              }}
             >
               <EditIcon />
             </IconButton>
@@ -56,9 +65,13 @@ const Message = (props: any) => {
             </IconButton>
           </React.Fragment>
         ) : (
-          <IconButton aria-label="Comments">
-            <CommentIcon />
-          </IconButton>
+          <React.Fragment>
+            {activeUser.id ? (
+              <IconButton aria-label="Comments">
+                <CommentIcon />
+              </IconButton>
+            ) : null}
+          </React.Fragment>
         )}
       </ListItemSecondaryAction>
     </ListItem>

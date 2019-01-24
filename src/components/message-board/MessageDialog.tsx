@@ -7,77 +7,62 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-interface IMessageDialog {
-  createMessage: (event: any) => void;
-}
-
-class MessageDialog extends React.Component<IMessageDialog> {
-  public state = {
-    open: false,
-    message: ''
-  };
-
-  public openDialog = () => {
-    this.setState({ open: true });
-  };
-
-  public closeDialog = () => {
-    this.setState({ open: false });
-  };
-
-  public onChange = (e: any) => {
-    this.setState({
-      message: e.target.value.trim()
-    });
-  };
-
-  public submitMessage = () => {
-    const { message } = this.state;
-    if (message) {
-      this.props.createMessage(message);
-      this.setState({
-        open: false
-      });
-    }
-  };
-  public render() {
-    return (
-      <div>
-        <Button variant="outlined" color="primary" onClick={this.openDialog}>
-          Create New Message
+const MessageDialog = ({
+  activeUser,
+  isDialogOpen,
+  toggleOpenState,
+  onChange,
+  submitMessage,
+  mode,
+  setMode
+}) => (
+  <div>
+    {activeUser.id ? (
+      <Button
+        variant="outlined"
+        color="primary"
+        onClick={() => setMode('Create')}
+      >
+        Create New Message
+      </Button>
+    ) : (
+      <p>
+        Select a user in the toolbar to create, edit, delete, and comment
+        messages.
+      </p>
+    )}
+    <Dialog
+      open={isDialogOpen}
+      onClose={toggleOpenState}
+      aria-labelledby="form-dialog-title"
+    >
+      <DialogTitle id="form-dialog-title">
+        <span>{mode === 'Create' ? 'Create New Message' : 'Edit Message'}</span>
+      </DialogTitle>
+      <DialogContent>
+        <DialogContentText>
+          Please fill in the field below to create your message.
+        </DialogContentText>
+        <TextField
+          autoFocus={true}
+          margin="dense"
+          id="message"
+          label="Message"
+          type="text"
+          fullWidth={true}
+          onChange={onChange}
+        />
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={toggleOpenState} color="primary">
+          Cancel
         </Button>
-        <Dialog
-          open={this.state.open}
-          onClose={this.closeDialog}
-          aria-labelledby="form-dialog-title"
-        >
-          <DialogTitle id="form-dialog-title">Create New Message</DialogTitle>
-          <DialogContent>
-            <DialogContentText>
-              Please fill in the field below to create your message.
-            </DialogContentText>
-            <TextField
-              autoFocus={true}
-              margin="dense"
-              id="message"
-              label="Message"
-              type="text"
-              fullWidth={true}
-              onChange={this.onChange}
-            />
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={this.closeDialog} color="primary">
-              Cancel
-            </Button>
-            <Button onClick={this.submitMessage} color="primary">
-              Create
-            </Button>
-          </DialogActions>
-        </Dialog>
-      </div>
-    );
-  }
-}
+        <Button onClick={submitMessage} color="primary">
+          Create
+        </Button>
+      </DialogActions>
+    </Dialog>
+  </div>
+);
 
 export default MessageDialog;

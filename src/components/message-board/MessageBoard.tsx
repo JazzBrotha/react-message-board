@@ -15,17 +15,61 @@ import MessageDialog from './MessageDialog';
 interface IMessageBoardProps extends StateProps, DispatchProps {}
 
 class MessageBoard extends React.Component<IMessageBoardProps> {
+  public state = {
+    isDialogOpen: false,
+    messageText: '',
+    mode: '',
+    activeMessage: undefined
+  };
   public componentDidMount = () => {
     this.props.fetchMessages();
   };
 
+  public setMode = (mode: string) => {
+    this.setState({
+      mode
+    });
+    this.toggleOpenState();
+  };
+
+  public setActiveMessage = (message: IMessage) => {
+    this.setState({
+      activeMessage: message
+    });
+    this.toggleOpenState();
+  };
+
+  public toggleOpenState = () => {
+    this.setState({
+      isDialogOpen: !this.state.isDialogOpen
+    });
+  };
+
+  public onChange = (e: any) => {
+    this.setState({
+      messageText: e.target.value.trim()
+    });
+  };
+
+  public submitMessage = () => {
+    const { messageText, mode, activeMessage } = this.state;
+    mode === 'Create'
+      ? this.createMessage(messageText)
+      : this.changeMessage(activeMessage);
+
+    this.setState({
+      isDialogOpen: false
+    });
+  };
+
   public createMessage = (message: string) => {
     const messageId: number = this.props.messages.length + 1;
+    const { activeUser } = this.props;
     const newMessage: IMessage = {
       id: messageId,
       message,
       parentId: null,
-      author: 1
+      author: activeUser.id
     };
     this.props.newMessage(newMessage);
   };
@@ -35,12 +79,14 @@ class MessageBoard extends React.Component<IMessageBoardProps> {
   };
 
   public changeMessage = (messageToChange: IMessage) => {
-    messageToChange.message = 'test';
+    messageToChange.message = this.state.messageText;
     this.props.updateMessage(messageToChange);
+    this.toggleOpenState();
   };
 
   public render() {
     const { messages, activeUser, users } = this.props;
+    const { isDialogOpen, mode } = this.state;
     return (
       <main>
         <Grid
@@ -56,17 +102,26 @@ class MessageBoard extends React.Component<IMessageBoardProps> {
                 <Message
                   key={message.id}
                   message={message}
-                  changeMessage={this.changeMessage}
+                  setMode={this.setMode}
                   deleteMessage={this.deleteMessage}
                   activeUser={activeUser}
                   users={users}
+                  setActiveMessage={this.setActiveMessage}
                 />
               ))}
             </List>
           ) : (
             <p>No messages posted.</p>
           )}
-          <MessageDialog createMessage={this.createMessage} />
+          <MessageDialog
+            activeUser={activeUser}
+            isDialogOpen={isDialogOpen}
+            onChange={this.onChange}
+            submitMessage={this.submitMessage}
+            toggleOpenState={this.toggleOpenState}
+            mode={mode}
+            setMode={this.setMode}
+          />
         </Grid>
       </main>
     );

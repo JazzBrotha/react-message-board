@@ -56,7 +56,7 @@ class TopBar extends React.Component<ITopBar> {
         <AppBar position="static" className={classes.root}>
           <Toolbar>
             <Typography variant="h6" color="inherit" className={classes.grow}>
-              MessageBoard
+              React Message Board
             </Typography>
             <Avatar src={user.imageUrl}>
               <ImageIcon />
