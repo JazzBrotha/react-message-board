@@ -14,10 +14,10 @@ interface IMessageDialogProps {
   submitMessage: Function;
   activeUser: IUser;
   isDialogOpen: boolean;
+  toggleOpenState: () => void;
 }
 
 interface IMessageDialogState {
-  isDialogOpen: boolean;
   messageText: string;
 }
 
@@ -26,14 +26,7 @@ class MessageDialog extends React.Component<
   IMessageDialogState
 > {
   state = {
-    isDialogOpen: this.props.isDialogOpen,
     messageText: ''
-  };
-
-  toggleOpenState = () => {
-    this.setState({
-      isDialogOpen: !this.state.isDialogOpen
-    });
   };
 
   onChange = (e: any) => {
@@ -43,8 +36,15 @@ class MessageDialog extends React.Component<
   };
 
   render() {
-    const { activeUser, mode, setMode, submitMessage } = this.props;
-    const { isDialogOpen, messageText } = this.state;
+    const {
+      activeUser,
+      mode,
+      setMode,
+      submitMessage,
+      toggleOpenState,
+      isDialogOpen
+    } = this.props;
+    const { messageText } = this.state;
     return (
       <div>
         {activeUser.id ? (
@@ -63,7 +63,7 @@ class MessageDialog extends React.Component<
         )}
         <Dialog
           open={isDialogOpen}
-          onClose={this.toggleOpenState}
+          onClose={toggleOpenState}
           aria-labelledby="form-dialog-title"
         >
           <DialogTitle id="form-dialog-title">{`${mode} Message`}</DialogTitle>
@@ -83,7 +83,7 @@ class MessageDialog extends React.Component<
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.toggleOpenState} color="primary">
+            <Button onClick={toggleOpenState} color="primary">
               Cancel
             </Button>
             <Button

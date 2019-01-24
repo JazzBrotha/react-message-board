@@ -37,6 +37,13 @@ class MessageContainer extends React.Component<
     this.setState({
       mode
     });
+    this.toggleOpenState();
+  };
+
+  toggleOpenState = () => {
+    this.setState({
+      isDialogOpen: !this.state.isDialogOpen
+    });
   };
 
   setActiveMessage = (message: IMessage) => {
@@ -67,6 +74,7 @@ class MessageContainer extends React.Component<
     } else {
       this.commentOnMessage(messageText);
     }
+    this.toggleOpenState();
   };
 
   deleteMessage = (id: number) => {
@@ -104,6 +112,7 @@ class MessageContainer extends React.Component<
           setMode={this.setMode}
           submitMessage={this.submitMessage}
           isDialogOpen={isDialogOpen}
+          toggleOpenState={this.toggleOpenState}
         />
         <MessageBoard
           setMode={this.setMode}
