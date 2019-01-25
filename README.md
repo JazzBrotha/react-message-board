@@ -43,6 +43,14 @@ Open a new window in your terminal and the start the development server by runni
 npm run start
 ```
 
+### Running tests
+
+You can run unit tests with the following command
+
+```bash
+npm run test
+```
+
 You should now be able to access the application in the browser on `http://localhost:8080`.
 
 ### Building the application for production
@@ -65,4 +73,4 @@ The application is tested on a Linux machine in Mozilla Firefox 62.0.3 and Googl
 
 ## Limitations
 
-Given more time, further testing could have been done in terms of browser support, i.e Safari, MS Edge, and Internet Explorer. There could also have been done further accessibility testing in terms of assistive technologies such as screen readers.
+Given more time with the project, the necessary unit tests could have been set up. More browser testing could have been done, i.e Safari, MS Edge, and Internet Explorer. Also, further accessibility testing in terms of assistive technologies such as screen readers could have have been performed.
