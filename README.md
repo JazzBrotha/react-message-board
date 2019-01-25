@@ -15,7 +15,7 @@ The minimum recommended version for `node.js` is 10.0.0, and for `npm` 5.6.0.
 
 ### Installation
 
-In order to run the application, you need to install [JSON Server](https://github.com/typicode/json-server) globally on your machine,
+In order to run the application, you need to install [JSON Server](https://github.com/typicode/json-server) globally on your machine
 
 ```bash
 npm install -g json-server
@@ -45,7 +45,7 @@ npm run start
 
 You should now be able to access the application in the browser on `http://localhost:8080`.
 
-### Building the application for production.
+### Building the application for production
 
 You can create a production build of the application by running
 

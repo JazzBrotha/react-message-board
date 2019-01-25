@@ -34,8 +34,7 @@
   },
   "scripts": {
     "start": "webpack-dev-server --mode development --open --hot",
-    "build": "webpack --mode production",
-    "lint": "tslint --project tsconfig.json -e 'node_modules/**'"
+    "build": "webpack --mode production"
   },
   "husky": {
     "hooks": {
