@@ -44,6 +44,9 @@ const messageListCardStyles = theme => ({
     // Fixes typescript widening issue
     // Read more here, https://github.com/Microsoft/TypeScript/issues/241
     overflowWrap: 'break-word' as 'break-word'
+  },
+  commentText: {
+    overflowWrap: 'break-word' as 'break-word'
   }
 });
 
@@ -102,7 +105,10 @@ class MessageCard extends React.Component<
             {currentMessage.message}
           </Typography>
         </CardContent>
-        <CardActions className={classes.actions} disableActionSpacing={true}>
+        <CardActions
+          className={classes.actions}
+          disableActionSpacing={true}
+        >
           {activeUser && currentMessage.author === activeUser.id ? (
             <React.Fragment>
               <IconButton
@@ -151,7 +157,11 @@ class MessageCard extends React.Component<
             </React.Fragment>
           ) : null}
         </CardActions>
-        <Collapse in={this.state.expanded} timeout="auto" unmountOnExit={true}>
+        <Collapse
+          in={this.state.expanded}
+          timeout="auto"
+          unmountOnExit={true}
+        >
           <CardContent>
             <Typography variant="h6">Comments</Typography>
             <List>
@@ -160,16 +170,19 @@ class MessageCard extends React.Component<
                   <ListItemAvatar>
                     <Avatar
                       src={
-                        users.find((user: IUser) => user.id === message.author)
-                          .imageUrl
+                        users.find(
+                          (user: IUser) => user.id === message.author
+                        ).imageUrl
                       }
                     />
                   </ListItemAvatar>
                   <ListItemText
+                    className={classes.commentText}
                     primary={message.message}
                     secondary={
-                      users.find((user: IUser) => user.id === message.author)
-                        .name
+                      users.find(
+                        (user: IUser) => user.id === message.author
+                      ).name
                     }
                   />
                 </ListItem>
