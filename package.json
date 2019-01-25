@@ -7,23 +7,31 @@
     "@material-ui/core": "^3.9.0",
     "@material-ui/icons": "^3.0.2",
     "react": "^16.7.0",
-    "react-dom": "^16.7.0",
     "react-redux": "^6.0.0",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
+    "@types/enzyme": "^3.1.15",
+    "@types/enzyme-adapter-react-16": "^1.0.3",
+    "@types/jest": "^23.3.13",
     "@types/material-ui": "^0.21.5",
     "@types/react": "^16.7.20",
     "@types/react-dom": "^16.0.11",
     "@types/react-redux": "^7.0.0",
     "awesome-typescript-loader": "^5.2.1",
+    "enzyme": "^3.8.0",
+    "enzyme-adapter-react-16": "^1.8.0",
     "html-webpack-plugin": "^3.2.0",
     "husky": "^1.3.1",
+    "jest": "^23.6.0",
+    "jest-fetch-mock": "^2.1.0",
     "precise-commits": "^1.0.2",
     "prettier": "^1.16.0",
+    "react-dom": "^16.7.0",
     "redux-devtools-extension": "^2.13.7",
     "source-map-loader": "^0.2.4",
+    "ts-jest": "^23.10.5",
     "tslint": "^5.12.1",
     "tslint-config-prettier": "^1.17.0",
     "tslint-react": "^3.6.0",
@@ -34,7 +42,35 @@
   },
   "scripts": {
     "start": "webpack-dev-server --mode development --open --hot",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "test": "./node_modules/.bin/jest"
+  },
+  "jest": {
+    "preset": "./test-preprocessor.js",
+    "transform": {
+      "^.+\\.js$": "<rootDir>/test-preprocessor.js",
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "globals": {
+      "ts-jest": {
+        "tsConfigFile": "tsconfig.jest.json"
+      }
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ],
+    "modulePaths": [
+      "<rootDir>"
+    ],
+    "setupFiles": [
+      "./test-setup.js"
+    ]
   },
   "husky": {
     "hooks": {
