@@ -44,6 +44,9 @@ const messageListCardStyles = theme => ({
     // Fixes typescript widening issue
     // Read more here, https://github.com/Microsoft/TypeScript/issues/241
     overflowWrap: 'break-word' as 'break-word'
+  },
+  commentText: {
+    overflowWrap: 'break-word' as 'break-word'
   }
 });
 
@@ -166,6 +169,7 @@ class MessageCard extends React.Component<
                     />
                   </ListItemAvatar>
                   <ListItemText
+                  className={classes.commentText}
                     primary={message.message}
                     secondary={
                       users.find((user: IUser) => user.id === message.author)
