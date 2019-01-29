@@ -43,11 +43,14 @@ export const updateMessage = (message: IMessage) => (dispatch: Function) => {
       'content-type': 'application/json'
     },
     body: JSON.stringify(message)
-  });
-  dispatch({
-    payload: message,
-    type: UPDATE_MESSAGE
-  });
+  })
+    .then(res => {
+      dispatch({
+        payload: message,
+        type: UPDATE_MESSAGE
+      });
+    })
+    .catch(err => console.log(err));
 };
 
 export const removeMessage = (id: number) => (dispatch: Function) => {
