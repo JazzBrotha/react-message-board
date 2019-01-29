@@ -27,7 +27,7 @@ export default (state = initialState, action: any) => {
       };
     case UPDATE_MESSAGE:
       const updatedMessage: IMessage = action.payload;
-      const stateMessages: IMessage[] = state.items.map(
+      const updatedMessages: IMessage[] = state.items.map(
         (stateMessage: IMessage) =>
           stateMessage.id === updatedMessage.id
             ? { ...stateMessage, message: updatedMessage.message }
@@ -35,7 +35,7 @@ export default (state = initialState, action: any) => {
       );
       return {
         ...state,
-        items: stateMessages
+        items: updatedMessages
       };
     case REMOVE_MESSAGE:
       const messageId: number = action.payload;

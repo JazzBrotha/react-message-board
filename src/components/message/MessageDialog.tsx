@@ -10,9 +10,7 @@ import IUser from '../../models/user.model';
 
 interface IMessageDialogProps {
   mode: string;
-  setMode: Function;
   submitMessage: Function;
-  activeUser: IUser;
   isDialogOpen: boolean;
   toggleOpenState: () => void;
 }
@@ -36,14 +34,7 @@ class MessageDialog extends React.Component<
   };
 
   render() {
-    const {
-      activeUser,
-      mode,
-      setMode,
-      submitMessage,
-      toggleOpenState,
-      isDialogOpen
-    } = this.props;
+    const { mode, submitMessage, toggleOpenState, isDialogOpen } = this.props;
     const { messageText } = this.state;
     return (
       <Dialog

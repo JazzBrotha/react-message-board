@@ -109,9 +109,7 @@ class MessageContainer extends React.Component<
     return (
       <React.Fragment>
         <MessageDialog
-          activeUser={activeUser}
           mode={mode}
-          setMode={this.setMode}
           submitMessage={this.submitMessage}
           isDialogOpen={isDialogOpen}
           toggleOpenState={this.toggleOpenState}
