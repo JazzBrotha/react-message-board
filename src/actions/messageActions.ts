@@ -15,7 +15,7 @@ export const fetchMessages = () => (dispatch: Function) => {
         payload: messages
       })
     )
-    .catch(err => console.log(err));
+    .catch(err => console.error(err));
 };
 
 export const newMessage = (message: IMessage) => (dispatch: Function) => {
@@ -33,7 +33,7 @@ export const newMessage = (message: IMessage) => (dispatch: Function) => {
         type: NEW_MESSAGE
       })
     )
-    .catch(err => console.log(err));
+    .catch(err => console.error(err));
 };
 
 export const updateMessage = (message: IMessage) => (dispatch: Function) => {
@@ -50,7 +50,7 @@ export const updateMessage = (message: IMessage) => (dispatch: Function) => {
         type: UPDATE_MESSAGE
       });
     })
-    .catch(err => console.log(err));
+    .catch(err => console.error(err));
 };
 
 export const removeMessage = (id: number) => (dispatch: Function) => {
@@ -63,5 +63,5 @@ export const removeMessage = (id: number) => (dispatch: Function) => {
         type: REMOVE_MESSAGE
       })
     )
-    .catch(err => console.log(err));
+    .catch(err => console.error(err));
 };
