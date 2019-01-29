@@ -8,15 +8,16 @@ import IMessage from '../models/message.model';
 
 const initialState = {
   items: [] as IMessage[],
-  item: {}
+  item: {} as IMessage
 };
 
 export default (state = initialState, action: any) => {
   switch (action.type) {
     case FETCH_MESSAGES:
+      const messages: IMessage[] = action.payload;
       return {
         ...state,
-        items: action.payload
+        items: messages
       };
     case NEW_MESSAGE:
       const newMessage: IMessage = action.payload;

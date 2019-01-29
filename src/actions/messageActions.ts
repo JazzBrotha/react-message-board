@@ -27,9 +27,9 @@ export const newMessage = (message: IMessage) => (dispatch: Function) => {
     body: JSON.stringify(message)
   })
     .then(res => res.json())
-    .then(message =>
+    .then(createdMessage =>
       dispatch({
-        payload: message,
+        payload: createdMessage,
         type: NEW_MESSAGE
       })
     )

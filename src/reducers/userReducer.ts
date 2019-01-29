@@ -3,25 +3,28 @@ import IUser from '../models/user.model';
 
 const initialState = {
   items: [] as IUser[],
-  item: {}
+  item: {} as IUser
 };
 
 export default (state = initialState, action: any) => {
   switch (action.type) {
     case FETCH_USERS:
+      const users: IUser[] = action.payload;
       return {
         ...state,
-        items: action.payload
+        items: users
       };
     case SET_USER:
+      const newUser: IUser = action.payload;
       return {
         ...state,
-        item: action.payload
+        item: newUser
       };
     case GET_USER:
+      const user: IUser = action.payload;
       return {
         ...state,
-        item: action.payload
+        item: user
       };
     default:
       return state;
